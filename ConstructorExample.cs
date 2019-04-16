@@ -1,32 +1,33 @@
-﻿/*
+/*
    Source: https://www.dotnetperls.com/constructor
    Author: Sam Allen
    Summary: This program demonstrates how to use the Base
             keyword to allow the derived constructor to invoke
             the base class constructor.
    Date: 13 Apr 2019
-   Modifications: ----
+   Modifications: Changed the original int values and renamed
+                  variables to demonstrate strings can also be used.
    Example Output:
-                    Bird() called with 450
-                    Parrot called with 450
+                    Box contains present
+                    Ribbon is wrapped with present
                     :::DONE:::
  */
 
 using System;
 
-public class Bird
+public class Box
 {
-    public Bird(int value)
+    public Box(string surprise)
     {
-        Console.WriteLine($"Bird() called with {value}");
+        Console.WriteLine($"Box contains {surprise}");
     }
 }
 
-public class Parrot : Bird
+public class Ribbon : Box
 {
-    public Parrot(int value) : base(value)
+    public Ribbon(string surprise) : base(surprise)
     {
-        Console.WriteLine($"Parrot called with {value}");
+        Console.WriteLine($"Ribbon is wrapped with {surprise}");
     }
 }
 
@@ -34,7 +35,8 @@ class Program
 {
     static void Main()
     {
-        Parrot parrot = new Parrot(450);
+        // 
+        Ribbon ribbon = new Ribbon("present");
         Console.WriteLine(":::DONE:::");
     }
 }
