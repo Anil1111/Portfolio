@@ -1,9 +1,9 @@
-﻿/*
+/*
    Source: https://www.sanfoundry.com/csharp-program-length-array/
    Author: Manish Bhojasia
    Summary: This program retrieves the length of an array.
    Date: 5 Apr 2019
-   Modifications: ----
+   Modifications: Modified program requesting user input
    Original Output:
                     Length of ArrayA : 5
                     Length of the LongLength Array is : 5
@@ -11,23 +11,32 @@
  */
 using System;
 class Program
+{
+    static void Main()
     {
-        static void Main()
-        {
-            // The arrayA is declared and initialized to an int type
-            // that stores 5 int value. However, values are not assigned.
-            int[] arrayA = new int[5];
-            int lengthA = arrayA.Length;
-            Console.WriteLine("Length of ArrayA : {0}", +lengthA);
-            long longLength = arrayA.LongLength;
-            Console.WriteLine("Length of the LongLength Array  : {0}", longLength);
-            
-            // twoD array is defined and initialized to an int type array
-            // that is two-dimensional and is given 5 rows and 10 columns.
-            // The .Length then calculates the length, giving 50 as the result.
-            int[,] twoD = new int[5, 10];
-            Console.WriteLine("The Size of 2D Array is : {0}", twoD.Length);
-            Console.ReadLine();
-        }
-    }
+        // Instead of hardcoding variables for the array,
+        // the program now requests input from the user.
+        Console.WriteLine("Input Custom Length for ArrayA: ");
 
+        // Using the int.Parse() method, the program will take
+        // the string from the user and convert it to an int
+        // value.
+        int[] arrayA = new int[int.Parse(Console.ReadLine())];
+        int lengthA = arrayA.Length;
+
+        long longLength = arrayA.LongLength;
+
+        Console.WriteLine("Input 2 Variables for 2D Array: ");
+
+        // twoD will require two separate int.Parse(Console.ReadLine())'s
+        // in its parameter because int[,] defined that it was 2
+        // dimensional.
+        int[,] twoD = new int[int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine())];
+
+        Console.WriteLine("Length of ArrayA : {0}", +lengthA);
+        Console.WriteLine("Length of the LongLength ArrayA  : {0}", longLength);
+        Console.WriteLine("The Size of 2D Array is : {0}", twoD.Length);
+
+        Console.ReadLine();
+    }
+}
