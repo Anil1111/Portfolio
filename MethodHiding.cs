@@ -1,12 +1,18 @@
-﻿/*
+/*
    Source: https://www.sanfoundry.com/csharp-program-method-hiding/
    Author: Manish Bhojasia
    Summary: This program demonstrates method hiding.
    Date: 13 Apr 2019
-   Modifications: ----
+   Modifications: Added a derived class of a child class A
+                  to show that the derived classes retain
+                  the base class' functionality.
    Example Output:
+                    900
+                    Parent Class
                     8000
-                    Derived Class
+                    Child Class
+                    390627
+                    Grandchild
  */
 
 using System;
@@ -16,29 +22,19 @@ namespace ConsoleApplication1
 {
     public class Demo
     {
-        // The base class Demo is made with the
-        // property Area that returns r * r.
+
         public virtual double Area(double r)
         {
             return r * r;
         }
         public void func()
         {
-            Console.WriteLine("Base Class");
+            Console.WriteLine("Parent Class");
         }
     }
     public class A : Demo
     {
 
-        // A is a child (derived) class with the parent
-        // class Demo. It retains the same properties
-        // and also has its own unique Area function.
-        // Whatever the 'r' value is, the function from
-        // the derived class will use both the base Area
-        // function and its own Area function, i.e., if
-        // r = 10, the program will calculate the base Area
-        // 10 * 10 to retrieve base.Area and then A:Demo
-        // will run its Area function again to get 1000.
         public override double Area(double r)
         {
 
@@ -46,22 +42,45 @@ namespace ConsoleApplication1
         }
         public new void func()
         {
-            Console.WriteLine("Derived Class");
+            Console.WriteLine("Child Class");
+        }
+    }
+
+    // The derived class of a derived class
+    // retains all of the parents' methods and
+    // employs its own functions.
+    public class B : A
+    {
+
+        public override double Area(double r)
+        {
+            return base.Area(r) * r + 2;
+        }
+
+        public new void func()
+        {
+            Console.WriteLine("Grandchild");
         }
     }
     public class Test
     {
+
+        // Variables o0 and o2 were added to
+        // show in the output console that the
+        // 'newest' class still inherits the
+        // properties from the base class while
+        // utilizing its own method.
         public static void Main(string[] args)
         {
-            // The object 'i1' variable is created for
-            // the child class A. o1 will then calculate
-            // the Area using the derived class and print
-            // the result. Afterwards, o1.func(); is
-            // executed which will print the child class'
-            // "Derived Class" line.
+            Demo o0 = new Demo();
+            Console.WriteLine(o0.Area(30));
+            o0.func();
             A o1 = new A();
             Console.WriteLine(o1.Area(20));
             o1.func();
+            B o2 = new B();
+            Console.WriteLine(o2.Area(25));
+            o2.func();
             Console.ReadLine();
         }
     }
