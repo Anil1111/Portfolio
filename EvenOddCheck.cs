@@ -1,9 +1,11 @@
-﻿/*
+/*
    Source: https://www.sanfoundry.com/csharp-program-check-given-number-even-odd/
    Author: Manish Bhojasia
    Summary: This program determines if the user's input is odd or even.
    Date: 5 Apr 2019
-   Modifications: ---
+   Modifications: Modified program requesting user input and moved Console.Read
+                  below the else statement to avoid redundant use as shown in the
+                  original program.
    Original Output:
                     User Input: 5
                     Entered Number is an Odd Number
@@ -19,30 +21,29 @@ namespace check1
     {
         static void Main(string[] args)
         {
-
-            // The program assigns the variable 'i' with the int data type
-            // since its function is to collect a numeric value from
-            // the user.
+            // The original program does not account for the possibility that an input
+            // may not be a number. Inputs other than a numeric value returns an exception.
+            // Using while loop in conjunction with TryParse(), the program will now
+            // let the user know if the input is a number. It will continue to loop the
+            // invalid message until the user inputs a number.
             int i;
             Console.Write("Enter a Number : ");
 
-            // The int.Parse method allows user's input (Console.ReadLine)
-            // to be converted from a string to an int data type. The
-            // conditional if checks to see if the input value does not
-            // return a remainder (or equals 0) when divided by 2. If the
-            // condition is not met, the else statement executes, indicating
-            // that the value is an odd number.
-            i = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out i))
+            {
+                Console.WriteLine("Invalid input, please enter a number : ");
+            }
+
             if (i % 2 == 0)
             {
                 Console.Write("Entered Number is an Even Number");
-                Console.Read();
             }
             else
             {
                 Console.Write("Entered Number is an Odd Number");
-                Console.Read();
             }
+
+            Console.Read();
         }
     }
 }
